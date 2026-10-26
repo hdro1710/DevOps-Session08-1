@@ -1,0 +1,11 @@
+name: ci-docker-test
+on: [push]
+jobs:
+  test:
+    runs-on: [self-hosted, linux, docker]
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker info
+      - run: |
+          echo "FROM alpine:3.20" > Dockerfile.test
+          docker build -t quickbite-test -f Dockerfile.test .
